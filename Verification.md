@@ -21,3 +21,9 @@
  ReviewsApi.js                              | 100     | 100      | 100     | 100     |
  topcoder-submission-api-wrapper/src/common | 96      | 81.82    | 100     | 96      |
  helper.js                                  | 96      | 81.82    | 100     | 96      |                63
+
+227 passing (46s)
+
+ File                                       | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s
+ -------------------------------------------|---------|----------|---------|---------|-----------------
+ All files                                  |  99.31  |  86.67   | 100     |  99.31  |topcoder-submission-api-wrapper            | 100     | 100      | 100     | 100     |index.js                                   | 100     | 100      | 100     | 100     |topcoder-submission-api-wrapper/src        | 100     | 100      | 100     | 100     |ReviewSummationsApi.js                     | 100     | 100      | 100     | 100     |ReviewTypesApi.js                          | 100     | 100      | 100     | 100     |ReviewsApi.js                              | 100     | 100      | 100     | 100     |SubmissionsApi.js                          | 100     | 100      | 100     | 100     |topcoder-submission-api-wrapper/src/common |  96.15  |  84.62   | 100     |  96     |helper.js                                  |  96.15  |  84.62   | 100     |  96     |                68

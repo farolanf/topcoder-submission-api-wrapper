@@ -92,6 +92,19 @@ Method | HTTP request | Description
 [**patchReviewSummation**](docs/ReviewSummationsApi.md#patchReviewSummation) | **PATCH** /reviewSummations/{reviewSummationId} | Partially update review summation.
 [**deleteReviewSummation**](docs/ReviewSummationsApi.md#deleteReviewSummation) | **DELETE** /reviewSummations/{reviewSummationId} | Delete the review summation.
 
+### Submissions wrapper methods
+
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**searchSubmissions**](docs/SubmissionsApi.md#searchSubmissions) | **GET** /submissions | Search submissions.
+[**headSubmissions**](docs/SubmissionsApi.md#headSubmissions) | **HEAD** /submissions | Same to search submissions, but only response status and headers information return.
+[**createSubmission**](docs/SubmissionsApi.md#createSubmission) | **POST** /submissions | Create a submission.
+[**getSubmission**](docs/SubmissionsApi.md#getSubmission) | **GET** /submissions/{submissionId} | Get the submission.
+[**headSubmission**](docs/SubmissionsApi.md#headSubmission) | **HEAD** /submissions/{submissionId} | Same to get submission, but only response status and headers information return.
+[**updateSubmission**](docs/SubmissionsApi.md#updateSubmission) | **PUT** /submissions/{submissionId} | Fully update submission.
+[**patchSubmission**](docs/SubmissionsApi.md#patchSubmission) | **PATCH** /submissions/{submissionId} | Partially update submission.
+[**deleteSubmission**](docs/SubmissionsApi.md#deleteSubmission) | **DELETE** /submissions/{submissionId} | Delete the submission.
+
 ## Authorization
 
 The wrapper internally generates a **JWT token using Auth0 credentials** and pass it in the `Authorization` header.
