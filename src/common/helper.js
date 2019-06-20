@@ -19,7 +19,7 @@ const getM2Mtoken = async (config) => {
  * @param {Object} config Configuration object
  * @param{String} reqType Type of the request POST / PATCH / PUT / GET / DELETE / HEAD
  * @param(String) path Complete path of the review types API URL
- * @param{Object} reqBody Body of the request
+ * @param{Object|function(request)} reqBody Body of the request or a function whose signature is (request)
  * @returns {Promise}
  */
 const reqToV5API = async (config, reqType, path, reqBody) => {
@@ -37,7 +37,12 @@ const reqToV5API = async (config, reqType, path, reqBody) => {
           .set('Authorization', `Bearer ${token}`)
           .set('Content-Type', 'application/json')
       case 'POST':
-        return request
+        // expect multipart request with .attach and .field if reqBody is a function
+        return _.isFunction(reqBody)
+          ? reqBody(request
+            .post(path)
+            .set('Authorization', `Bearer ${token}`))
+          : request
           .post(path)
           .set('Authorization', `Bearer ${token}`)
           .set('Content-Type', 'application/json')
