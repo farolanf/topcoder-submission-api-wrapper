@@ -2,6 +2,8 @@
  * Tests for Submission APIs
  */
 
+const fs = require('fs')
+const FormData = require('form-data')
 const _ = require('lodash')
 const should = require('chai').should()
 const config = require('./testConfig')
@@ -276,6 +278,22 @@ describe('Submission API Tests', () => {
         .field('type', type)
         .field('memberId', memberId)
         .field('challengeId', challengeId))
+      createdSubmissionId = res.body.id
+      should.equal(res.status, 200)
+      should.equal(res.body.type, type)
+      should.equal(res.body.fileType, 'zip')
+      should.equal(res.body.memberId, memberId)
+      should.equal(res.body.challengeId, challengeId)
+    })
+
+    it(`Create submission with FormData success`, async () => {
+      const fd = new FormData()
+      fd.append('submission', fs.createReadStream('./test/common/fileToUpload.zip'))
+      fd.append('fileType', 'zip')
+      fd.append('type', type)
+      fd.append('memberId', memberId)
+      fd.append('challengeId', challengeId)
+      const res = await client.createSubmission(fd)
       createdSubmissionId = res.body.id
       should.equal(res.status, 200)
       should.equal(res.body.type, type)

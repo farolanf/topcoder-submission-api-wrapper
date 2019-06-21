@@ -139,17 +139,33 @@ const submissionApiClient = submissionApi(_.pick(config,
         'AUTH0_CLIENT_ID', 'AUTH0_CLIENT_SECRET', 'SUBMISSION_API_URL',
         'AUTH0_PROXY_SERVER_URL']))
 
+// with file url
 const reqBody = {
-  submission: file, // either this or url
-  url: 'https://domain.com/file.zip', // either this or submission
+  url: 'https://domain.com/file.zip',
   fileType: 'zip',
   type: 'ContestSubmission',
   memberId: 'a12a4180-65aa-42ec-a945-5fd21dec0501',
-  challengeId: 'a12a4180-65aa-42ec-a945-5fd21dec0502',
-  legacySubmissionId: 'b24d4180-65aa-42ec-a945-5fd21dec0502',
-  legacyUploadId: 'b24d4180-65aa-42ec-a945-5fd21dec0403',
-  submissionPhaseId: 'b24d4180-65aa-42ec-a945-5fd21dec0502'
+  challengeId: 'a12a4180-65aa-42ec-a945-5fd21dec0502'
 }
+
+// with FormData file upload on node
+const reqBody = request => request
+  .attach('submission', './test/common/fileToUpload.zip')
+  .field('fileType', 'zip')
+  .field('type', 'ContestSubmission')
+  .field('memberId', 'a12a4180-65aa-42ec-a945-5fd21dec0501')
+  .field('challengeId', 'a12a4180-65aa-42ec-a945-5fd21dec0502')
+
+// with FormData on browser 1
+const reqBody = new FormData(document.getElementById('myForm'))
+
+// with FormData on browser 2
+const reqBody = new FormData()
+reqBody.append('submission', Blob|File)
+reqBody.append('fileType', 'zip')
+reqBody.append('type', 'ContestSubmission')
+reqBody.append('memberId', 'a12a4180-65aa-42ec-a945-5fd21dec0501')
+reqBody.append('challengeId', 'a12a4180-65aa-42ec-a945-5fd21dec0502')
 
 // Promise model
 submissionApiClient

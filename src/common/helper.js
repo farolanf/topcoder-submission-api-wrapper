@@ -1,5 +1,6 @@
 const m2mAuth = require('tc-core-library-js').auth.m2m
 const request = require('superagent')
+const axios = require('axios')
 const _ = require('lodash')
 let m2m = null
 
@@ -19,7 +20,7 @@ const getM2Mtoken = async (config) => {
  * @param {Object} config Configuration object
  * @param{String} reqType Type of the request POST / PATCH / PUT / GET / DELETE / HEAD
  * @param(String) path Complete path of the review types API URL
- * @param{Object|function(request)} reqBody Body of the request or a function whose signature is (request)
+ * @param{Object|FormData|function(request)} reqBody Body of the request, FormData object, or a function whose signature is (request)
  * @returns {Promise}
  */
 const reqToV5API = async (config, reqType, path, reqBody) => {
@@ -36,17 +37,38 @@ const reqToV5API = async (config, reqType, path, reqBody) => {
           .head(path)
           .set('Authorization', `Bearer ${token}`)
           .set('Content-Type', 'application/json')
-      case 'POST':
-        // expect multipart request with .attach and .field if reqBody is a function
-        return _.isFunction(reqBody)
-          ? reqBody(request
-            .post(path)
-            .set('Authorization', `Bearer ${token}`))
-          : request
+      case 'POST': {
+        const req = request
           .post(path)
           .set('Authorization', `Bearer ${token}`)
-          .set('Content-Type', 'application/json')
-          .send(reqBody)
+        if (_.isFunction(reqBody)) {
+          // pass the request for building the body, eg. with request.type('form')
+          // or request.field and request.attach
+          return reqBody(req)
+        } else if (_.isPlainObject(reqBody)) {
+          return req
+            .set('Content-Type', 'application/json')
+            .send(reqBody)
+        } else { // expect reqBody to be a FormData object
+          const options = {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            }
+          }
+          // handle FormData from form-data package (used in tests)
+          if (_.isFunction(reqBody.getHeaders)) {
+            Object.assign(options.headers, reqBody.getHeaders())
+          }
+          // use axios for better support on direct passing of FormData
+          return axios
+            .post(path, reqBody, options)
+            .then(res => {
+              // mimic superagent response
+              res.body = res.data
+              return res
+            })
+        }
+      }
       case 'PUT':
         return request
           .put(path)
