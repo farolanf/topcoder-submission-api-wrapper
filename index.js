@@ -137,6 +137,41 @@ module.exports = (config) => {
     // Delete review summation
     deleteReviewSummation: async (reviewSummationId) => {
       return require('./src/ReviewSummationsApi').deleteReviewSummation(config, reviewSummationId)
+    },
+
+    // -- submission APIs --
+
+    // Search submissions
+    searchSubmissions: async (reqQuery) => {
+      return require('./src/SubmissionsApi').searchSubmissions(config, reqQuery)
+    },
+    // Head submissions
+    headSubmissions: async (reqQuery) => {
+      return require('./src/SubmissionsApi').headSubmissions(config, reqQuery)
+    },
+    // Create submission
+    createSubmission: async (reqBody) => {
+      return require('./src/SubmissionsApi').createSubmission(config, reqBody)
+    },
+    // Get submission
+    getSubmission: async (submissionId) => {
+      return require('./src/SubmissionsApi').getSubmission(config, submissionId)
+    },
+    // Head submission
+    headSubmission: async (submissionId) => {
+      return require('./src/SubmissionsApi').headSubmission(config, submissionId)
+    },
+    // Fully update submission
+    updateSubmission: async (submissionId, reqBody) => {
+      return require('./src/SubmissionsApi').updateSubmission(config, submissionId, reqBody)
+    },
+    // Partially update submission
+    patchSubmission: async (submissionId, reqBody) => {
+      return require('./src/SubmissionsApi').patchSubmission(config, submissionId, reqBody)
+    },
+    // Delete submission
+    deleteSubmission: async (submissionId) => {
+      return require('./src/SubmissionsApi').deleteSubmission(config, submissionId)
     }
   }
 }

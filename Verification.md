@@ -8,16 +8,17 @@
 
 ## Test Coverage Report
 
-172 passing (9m)
+232 passing (6m)
 
  File                                       | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s
- ------------------------------------------ | ------- | -------- | ------- | ------- | -----------------
- All files                                  | 99.14   | 84.62    | 100     | 99.14   |
+ -------------------------------------------|---------|----------|---------|---------|-----------------
+ All files                                  |  99.35  |  84.21   | 100     |  99.35  |
  topcoder-submission-api-wrapper            | 100     | 100      | 100     | 100     |
  index.js                                   | 100     | 100      | 100     | 100     |
  topcoder-submission-api-wrapper/src        | 100     | 100      | 100     | 100     |
  ReviewSummationsApi.js                     | 100     | 100      | 100     | 100     |
  ReviewTypesApi.js                          | 100     | 100      | 100     | 100     |
  ReviewsApi.js                              | 100     | 100      | 100     | 100     |
- topcoder-submission-api-wrapper/src/common | 96      | 81.82    | 100     | 96      |
- helper.js                                  | 96      | 81.82    | 100     | 96      |                63
+ SubmissionsApi.js                          | 100     | 100      | 100     | 100     |
+ topcoder-submission-api-wrapper/src/common |  97.22  |  82.35   | 100     |  97.22  |
+ helper.js                                  |  97.22  |  82.35   | 100     |  97.22  |  90
